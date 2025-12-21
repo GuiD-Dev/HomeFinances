@@ -22,6 +22,7 @@ dist-ssr
 *.njsproj
 *.sw?
 
+*.sql
 
 /GastosResidenciais.WebApi/bin
 /GastosResidenciais.WebApi/obj
