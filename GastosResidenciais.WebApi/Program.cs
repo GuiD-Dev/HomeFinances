@@ -1,8 +1,15 @@
+using GastosResidenciais.WebApi.Infra.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddDbContext<PgSqlDbContext>(options =>
+    options.UseNpgsql(builder.Configuration["PgSQlConnection:PgSQlConnectionString"])
+);
 
 var app = builder.Build();
 
