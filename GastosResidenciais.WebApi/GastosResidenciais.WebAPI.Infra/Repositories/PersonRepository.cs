@@ -11,9 +11,9 @@ public class PersonRepository(PgSqlDbContext context) : IPersonRepository
         return context.People.ToList();
     }
 
-    public Person GetOne(int id)
+    public Person GetOneById(int id)
     {
-        throw new NotImplementedException();
+        return context.People.FirstOrDefault(c => c.Id == id);
     }
 
     public Person Insert(Person person)

@@ -14,7 +14,7 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
 
     public Person GetPerson(int id)
     {
-        return personRepository.GetOne(id);
+        return personRepository.GetOneById(id);
     }
 
     public Person InsertPerson(PersonDto dto)
