@@ -11,14 +11,28 @@ public class Category
     public int Id { get; set; }
 
     [Column("description"), Required]
-    public string Description { get; set; }
-    
-    [Column("purpose"), Required]
-    public CategoryPurpose Purpose { get; set; }
-
-    public Category(string description, CategoryPurpose purpose)
+    public string Description
     {
-        Description = description;
-        Purpose = purpose;
+        get;
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Description cannot be empty");
+
+            field = value;
+        }
+    }
+
+    [Column("purpose"), Required]
+    public CategoryPurpose Purpose
+    {
+        get;
+        set
+        {
+            if (!Enum.IsDefined(typeof(CategoryPurpose), value))
+                throw new ArgumentException("Invalid purpose");
+
+            field = value;
+        }
     }
 }
