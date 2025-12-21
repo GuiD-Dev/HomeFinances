@@ -11,39 +11,53 @@ public class Transaction
     public int Id { get; set; }
 
     [Column("description"), Required]
-    public string Description { get; set; }
+    public string Description
+    {
+        get;
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new ArgumentException("Description cannot be empty");
+
+            field = value;
+        }
+    }
 
     [Column("value"), Required]
     public decimal Value { get; set; }
 
     [Column("type"), Required]
-    public TransactionType Type { get; set; }
+    public TransactionType Type
+    {
+        get;
+        set
+        {
+            if (!Enum.IsDefined(typeof(TransactionType), value))
+                throw new ArgumentException("Invalid Transaction Type");
+
+            field = value;
+        }
+    }
 
     [Column("category"), Required]
-    public Category Category { get; set; }
+    public Category Category
+    {
+        get;
+        set
+        {
+            if (
+                value.Purpose == CategoryPurpose.Recipe && Type == TransactionType.Expense
+                ||
+                value.Purpose == CategoryPurpose.Expense && Type == TransactionType.Recipe
+            )
+            {
+                throw new Exception("Transaction Type and Category are incompatible");
+            }
+
+            field = value;
+        }
+    }
 
     [Column("person"), Required]
     public Person Person { get; set; }
-
-    // Used by EntityFramework
-    private Transaction() { }
-
-    public Transaction(string description, decimal value, TransactionType type, Category category, Person person)
-    {
-        if (
-            Category?.Purpose == CategoryPurpose.Recipe && Type == TransactionType.Expense
-            ||
-            Category?.Purpose == CategoryPurpose.Expense && Type == TransactionType.Recipe
-        )
-        {
-            throw new Exception("Transaction Type and Category are incompatible");
-        }
-
-        Description = description;
-        Value = value;
-        Type = type;
-        Category = category;
-        Person = person;
-
-    }
 }
