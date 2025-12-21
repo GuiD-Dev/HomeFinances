@@ -8,16 +8,30 @@ public class Person
 {
     [Column("id"), Key]
     public int Id { get; set; }
-    
-    [Column("name"), Required]
-    public string Name { get; set; }
-    
-    [Column("age"), Required]
-    public uint Age { get; set; }
 
-    public Person(string name, uint age)
+    [Column("name"), Required]
+    public string Name
     {
-        Name = name;
-        Age = age;
+        get;
+        set
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new Exception("Name cannot be empty");
+
+            field = value;
+        }
+    }
+
+    [Column("age"), Required]
+    public int Age
+    {
+        get;
+        set
+        {
+            if (value < 0)
+                throw new Exception("Age cannot lower than 0");
+
+            field = value;
+        }
     }
 }

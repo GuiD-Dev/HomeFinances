@@ -19,7 +19,7 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
 
     public Person InsertPerson(PersonDto dto)
     {
-        var person = new Person(dto.Name, dto.Age);
+        var person = new Person { Name = dto.Name, Age = dto.Age };
         return personRepository.Insert(person);
     }
 

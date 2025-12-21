@@ -17,7 +17,14 @@ public class PersonController(IPersonService personService) : ControllerBase
     [HttpPost]
     public IActionResult InsertPerson(PersonDto dto)
     {
-        return Created(string.Empty, personService.InsertPerson(dto));
+        try
+        {
+            return Created(string.Empty, personService.InsertPerson(dto));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 
     [HttpDelete("{id}")]
