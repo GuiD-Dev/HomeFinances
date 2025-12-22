@@ -7,9 +7,9 @@ namespace GastosResidenciais.WebApi.Application.Services;
 
 public class CategoryService(ICategoryRepository categoryRepository) : ICategoryService
 {
-    public IEnumerable<Category> ListCategories()
+    public IEnumerable<CategoryDto> ListCategories()
     {
-        return categoryRepository.GetMany();
+        return categoryRepository.GetMany().Select(category => (CategoryDto)category);
     }
 
     public Category GetCategory(int id)
@@ -17,10 +17,10 @@ public class CategoryService(ICategoryRepository categoryRepository) : ICategory
         return categoryRepository.GetOneById(id);
     }
 
-    public Category InsertCategory(CategoryDto dto)
+    public CategoryDto InsertCategory(CategoryDto dto)
     {
-        var category = new Category { Description = dto.Description, Purpose = dto.Purpose };
-        return categoryRepository.Insert(category);
+        categoryRepository.Insert((Category)dto);
+        return dto;
     }
 
     public bool DeleteCategory(int id)

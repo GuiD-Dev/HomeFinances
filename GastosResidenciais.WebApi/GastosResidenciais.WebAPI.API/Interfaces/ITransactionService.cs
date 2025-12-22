@@ -5,8 +5,8 @@ namespace GastosResidenciais.WebApi.API.Interfaces;
 
 public interface ITransactionService
 {
-    IEnumerable<Transaction> ListTransactions();
+    IEnumerable<TransactionDto> ListTransactions();
     Transaction GetTransaction(int id);
-    Transaction InsertTransaction(TransactionDto dto);
+    TransactionDto InsertTransaction(TransactionDto dto);
     bool DeleteTransaction(int id);
 }

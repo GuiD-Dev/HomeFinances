@@ -7,9 +7,9 @@ namespace GastosResidenciais.WebApi.Application.Services;
 
 public class TransactionService(IPersonRepository personRepository, ICategoryRepository categoryRepository, ITransactionRepository transactionRepository) : ITransactionService
 {
-    public IEnumerable<Transaction> ListTransactions()
+    public IEnumerable<TransactionDto> ListTransactions()
     {
-        return transactionRepository.GetMany();
+        return transactionRepository.GetMany().Select(transaction => (TransactionDto)transaction);
     }
 
     public Transaction GetTransaction(int id)
@@ -17,7 +17,7 @@ public class TransactionService(IPersonRepository personRepository, ICategoryRep
         return transactionRepository.GetOneById(id);
     }
 
-    public Transaction InsertTransaction(TransactionDto dto)
+    public TransactionDto InsertTransaction(TransactionDto dto)
     {
         var category = categoryRepository.GetOneById(dto.CategoryId);
         if (category is null)
@@ -27,16 +27,11 @@ public class TransactionService(IPersonRepository personRepository, ICategoryRep
         if (person is null)
             throw new Exception("Person not found");
 
-        var transaction = new Transaction
-        {
-            Description = dto.Description,
-            Value = dto.Value,
-            Category = category,
-            Type = dto.Type,
-            Person = person,
-        };
+        var transaction = (Transaction)dto;
+        transaction.Category = category;
+        transaction.Person = person;
 
-        return transactionRepository.Insert(transaction);
+        return (TransactionDto)transactionRepository.Insert(transaction);
     }
 
     public bool DeleteTransaction(int id)

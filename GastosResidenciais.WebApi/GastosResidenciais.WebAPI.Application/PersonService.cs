@@ -7,9 +7,9 @@ namespace GastosResidenciais.WebApi.Application.Services;
 
 public class PersonService(IPersonRepository personRepository) : IPersonService
 {
-    public IEnumerable<Person> ListPeople()
+    public IEnumerable<PersonDto> ListPeople()
     {
-        return personRepository.GetMany();
+        return personRepository.GetMany().Select(person => (PersonDto)person);
     }
 
     public Person GetPerson(int id)
@@ -17,10 +17,10 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
         return personRepository.GetOneById(id);
     }
 
-    public Person InsertPerson(PersonDto dto)
+    public PersonDto InsertPerson(PersonDto dto)
     {
-        var person = new Person { Name = dto.Name, Age = dto.Age };
-        return personRepository.Insert(person);
+        personRepository.Insert((Person)dto);
+        return dto;
     }
 
     public bool DeletePerson(int id)

@@ -5,8 +5,8 @@ namespace GastosResidenciais.WebApi.API.Interfaces;
 
 public interface ICategoryService
 {
-    IEnumerable<Category> ListCategories();
+    IEnumerable<CategoryDto> ListCategories();
     Category GetCategory(int id);
-    Category InsertCategory(CategoryDto dto);
+    CategoryDto InsertCategory(CategoryDto dto);
     bool DeleteCategory(int id);
 }
