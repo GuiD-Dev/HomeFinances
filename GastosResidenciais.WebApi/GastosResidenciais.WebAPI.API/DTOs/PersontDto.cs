@@ -4,6 +4,7 @@ namespace GastosResidenciais.WebApi.API.DTOs;
 
 public class PersonDto
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public int Age { get; set; }
     public IEnumerable<TransactionDto> Transactions { get; set; }
@@ -15,6 +16,7 @@ public class PersonDto
     {
         return new Person
         {
+            Id = dto.Id,
             Name = dto.Name,
             Age = dto.Age,
         };
@@ -24,15 +26,16 @@ public class PersonDto
     {
         return new PersonDto
         {
+            Id = entity.Id,
             Name = entity.Name,
             Age = entity.Age,
-            Transactions = entity.Transactions
+            Transactions = entity.Transactions?
                 .Select(transaction => new TransactionDto
                 {
                     Description = transaction.Description,
                     Value = transaction.Value,
                     Type = transaction.Type,
-                }),
+                }) ?? [],
             Recipes = entity.Recipes,
             Expenses = entity.Expenses,
             Balance = entity.Balance,
