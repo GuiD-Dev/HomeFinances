@@ -15,9 +15,11 @@ public class TransactionRepository(PgSqlDbContext context) : ITransactionReposit
                         .ToList();
     }
 
-    public Transaction GetOneById(int id)
+    public Transaction GetOneById(int id, bool asNoTracking = false)
     {
-        throw new NotImplementedException();
+        var query = context.Transactions.AsQueryable();
+        if (asNoTracking) query = query.AsNoTracking();
+        return query.FirstOrDefault(t => t.Id == id);
     }
 
     public Transaction Insert(Transaction transaction)
@@ -29,9 +31,8 @@ public class TransactionRepository(PgSqlDbContext context) : ITransactionReposit
 
     public bool Delete(int id)
     {
-        var transaction = context.Transactions.FirstOrDefault(p => p.Id == id);
-        if (transaction is null)
-            throw new Exception("Id not found");
+        var transaction = GetOneById(id);
+        if (transaction is null) throw new Exception("Id not found");
 
         context.Transactions.Remove(transaction);
         context.SaveChanges();

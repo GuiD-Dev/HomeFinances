@@ -1,6 +1,7 @@
 using GastosResidenciais.WebApi.Application.Interfaces;
 using GastosResidenciais.WebApi.Domain.Entities;
 using GastosResidenciais.WebApi.Infra.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace GastosResidenciais.WebApi.Infra.Repositories;
 
@@ -11,9 +12,11 @@ public class CategoryRepository(PgSqlDbContext context) : ICategoryRepository
         return context.Categories.ToList();
     }
 
-    public Category GetOneById(int id)
+    public Category GetOneById(int id, bool asNoTracking = false)
     {
-        return context.Categories.FirstOrDefault(c => c.Id == id);
+        var query = context.Categories.AsQueryable();
+        if (asNoTracking) query = query.AsNoTracking();
+        return query.FirstOrDefault(c => c.Id == id);
     }
 
     public Category Insert(Category category)
@@ -25,9 +28,8 @@ public class CategoryRepository(PgSqlDbContext context) : ICategoryRepository
 
     public bool Delete(int id)
     {
-        var category = context.Categories.FirstOrDefault(p => p.Id == id);
-        if (category is null)
-            throw new Exception("Id not found");
+        var category = GetOneById(id);
+        if (category is null) throw new Exception("Id not found");
 
         context.Categories.Remove(category);
         context.SaveChanges();

@@ -12,9 +12,11 @@ public class PersonRepository(PgSqlDbContext context) : IPersonRepository
         return context.People.Include(p => p.Transactions).ToList();
     }
 
-    public Person GetOneById(int id)
+    public Person GetOneById(int id, bool asNoTracking = false)
     {
-        return context.People.FirstOrDefault(c => c.Id == id);
+        var query = context.People.AsQueryable();
+        if (asNoTracking) query = query.AsNoTracking();
+        return query.FirstOrDefault(p => p.Id == id);
     }
 
     public Person Insert(Person person)
@@ -26,9 +28,8 @@ public class PersonRepository(PgSqlDbContext context) : IPersonRepository
 
     public bool Delete(int id)
     {
-        var person = context.People.FirstOrDefault(p => p.Id == id);
-        if (person is null)
-            throw new Exception("Id not found");
+        var person = GetOneById(id);
+        if (person is null) throw new Exception("Id not found");
 
         context.People.Remove(person);
         context.SaveChanges();
