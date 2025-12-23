@@ -53,8 +53,8 @@ namespace GastosResidenciais.WebApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Age")
-                        .HasColumnType("bigint")
+                    b.Property<int>("Age")
+                        .HasColumnType("integer")
                         .HasColumnName("age");
 
                     b.Property<string>("Name")
@@ -113,7 +113,7 @@ namespace GastosResidenciais.WebApi.Migrations
                         .IsRequired();
 
                     b.HasOne("GastosResidenciais.WebApi.Domain.Entities.Person", "Person")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -121,6 +121,11 @@ namespace GastosResidenciais.WebApi.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("GastosResidenciais.WebApi.Domain.Entities.Person", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

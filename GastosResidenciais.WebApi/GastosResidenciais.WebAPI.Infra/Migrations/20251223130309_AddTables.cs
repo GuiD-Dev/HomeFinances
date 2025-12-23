@@ -32,7 +32,7 @@ namespace GastosResidenciais.WebApi.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     name = table.Column<string>(type: "text", nullable: false),
-                    age = table.Column<long>(type: "bigint", nullable: false)
+                    age = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GastosResidenciais.WebApi.Migrations
 {
     [DbContext(typeof(PgSqlDbContext))]
-    [Migration("20251221042810_AddTables")]
+    [Migration("20251223130309_AddTables")]
     partial class AddTables
     {
         /// <inheritdoc />
@@ -56,8 +56,8 @@ namespace GastosResidenciais.WebApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("Age")
-                        .HasColumnType("bigint")
+                    b.Property<int>("Age")
+                        .HasColumnType("integer")
                         .HasColumnName("age");
 
                     b.Property<string>("Name")
@@ -116,7 +116,7 @@ namespace GastosResidenciais.WebApi.Migrations
                         .IsRequired();
 
                     b.HasOne("GastosResidenciais.WebApi.Domain.Entities.Person", "Person")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -124,6 +124,11 @@ namespace GastosResidenciais.WebApi.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Person");
+                });
+
+            modelBuilder.Entity("GastosResidenciais.WebApi.Domain.Entities.Person", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }
