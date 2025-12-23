@@ -19,7 +19,12 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
 
     public PersonDto InsertPerson(PersonDto dto)
     {
-        personRepository.Insert((Person)dto);
+        return (PersonDto)personRepository.Insert((Person)dto);
+    }
+
+    public PersonDto UpdatePerson(PersonDto dto)
+    {
+        personRepository.Update((Person)dto);
         return dto;
     }
 

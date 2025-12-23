@@ -26,6 +26,16 @@ public class PersonRepository(PgSqlDbContext context) : IPersonRepository
         return person;
     }
 
+    public Person Update(Person person)
+    {
+        if (GetOneById(person.Id, asNoTracking: true) is null)
+            throw new Exception("Id not found");
+
+        context.People.Update(person);
+        context.SaveChanges();
+        return person;
+    }
+
     public bool Delete(int id)
     {
         var person = GetOneById(id);

@@ -27,6 +27,20 @@ public class PersonController(IPersonService personService) : ControllerBase
         }
     }
 
+    [HttpPut]
+    public IActionResult UpdatePerson(PersonDto dto)
+    {
+        try
+        {
+            personService.UpdatePerson(dto);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
     [HttpDelete("{id}")]
     public IActionResult DeletePerson(int id)
     {
@@ -37,7 +51,7 @@ public class PersonController(IPersonService personService) : ControllerBase
         }
         catch (Exception e)
         {
-            return NotFound(e.Message);
+            return BadRequest(e.Message);
         }
     }
 }
