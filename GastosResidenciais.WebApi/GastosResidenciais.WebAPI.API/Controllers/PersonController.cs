@@ -8,10 +8,16 @@ namespace GastosResidenciais.WebApi.API.Controllers;
 [Route("[controller]")]
 public class PersonController(IPersonService personService) : ControllerBase
 {
-    [HttpGet]
+    [HttpGet("list")]
     public IActionResult ListPeople()
     {
         return Ok(personService.ListPeople());
+    }
+
+    [HttpGet("list-with-transactions")]
+    public IActionResult ListPeopleAndTransactions()
+    {
+        return Ok(personService.ListPeopleAndTransactions());
     }
 
     [HttpPost]

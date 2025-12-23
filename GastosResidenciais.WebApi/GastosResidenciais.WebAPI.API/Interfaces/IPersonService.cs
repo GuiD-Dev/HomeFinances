@@ -6,6 +6,7 @@ namespace GastosResidenciais.WebApi.API.Interfaces;
 public interface IPersonService
 {
     IEnumerable<PersonDto> ListPeople();
+    IEnumerable<PersonDto> ListPeopleAndTransactions();
     Person GetPerson(int id);
     PersonDto InsertPerson(PersonDto dto);
     PersonDto UpdatePerson(PersonDto dto);

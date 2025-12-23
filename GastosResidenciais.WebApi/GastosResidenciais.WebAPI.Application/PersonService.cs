@@ -9,7 +9,14 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
 {
     public IEnumerable<PersonDto> ListPeople()
     {
-        return personRepository.GetMany().Select(person => (PersonDto)person);
+        return personRepository.GetMany()
+            .Select(person => (PersonDto)person);
+    }
+
+    public IEnumerable<PersonDto> ListPeopleAndTransactions()
+    {
+        return personRepository.GetMany(includeTransactions: true)
+            .Select(person => (PersonDto)person);
     }
 
     public Person GetPerson(int id)
