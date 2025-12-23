@@ -7,9 +7,11 @@ namespace GastosResidenciais.WebApi.Infra.Repositories;
 
 public class PersonRepository(PgSqlDbContext context) : IPersonRepository
 {
-    public IEnumerable<Person> GetMany()
+    public IEnumerable<Person> GetMany(bool includeTransactions = false)
     {
-        return context.People.Include(p => p.Transactions).ToList();
+        var query = context.People.AsQueryable();
+        if (includeTransactions) query = query.Include(p => p.Transactions);
+        return query.ToList();
     }
 
     public Person GetOneById(int id, bool asNoTracking = false)
