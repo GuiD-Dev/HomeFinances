@@ -38,7 +38,7 @@ public class Person
 
     public virtual ICollection<Transaction> Transactions { get; set; }
 
-    public decimal Recipes => Transactions.Where(t => t.Type == TransactionType.Recipe)?.Sum(t => t.Value) ?? 0m;
-    public decimal Expenses => Transactions.Where(t => t.Type == TransactionType.Expense)?.Sum(t => t.Value) ?? 0m;
+    public decimal Recipes => Transactions?.Where(t => t.Type == TransactionType.Recipe)?.Sum(t => t.Value) ?? 0m;
+    public decimal Expenses => Transactions?.Where(t => t.Type == TransactionType.Expense)?.Sum(t => t.Value) ?? 0m;
     public decimal Balance => Recipes - Expenses;
 }
