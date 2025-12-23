@@ -22,11 +22,15 @@ export function PersonPage() {
       await createPerson(person)
     else
       await updatePerson(person)
+
+    setPeople(await getPeople());
   }
 
   async function handleDelete(id: number) {
-    if (confirm("Confirm the exclusion of the person?"))
+    if (confirm("Confirm the exclusion of the person?")) {
       await deletePerson(id);
+      setPeople(await getPeople());
+    }
   }
 
   return (

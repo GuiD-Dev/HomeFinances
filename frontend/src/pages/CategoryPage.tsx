@@ -19,11 +19,14 @@ export function CategoryPage() {
 
   async function handleSubmit(category: Category) {
     await createCategory(category)
+    setCategories(await getCategories());
   }
 
   async function handleDelete(id: number) {
-    if (confirm("Confirm the exclusion of the category?"))
+    if (confirm("Confirm the exclusion of the category?")) {
       await deleteCategory(id);
+      setCategories(await getCategories());
+    }
   }
 
   return (
