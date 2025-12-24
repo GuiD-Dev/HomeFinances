@@ -1,7 +1,7 @@
 using HomeFinances.WebApi.Application.DTOs;
 using HomeFinances.WebApi.Domain.Entities;
 
-namespace HomeFinances.WebApi.API.Interfaces;
+namespace HomeFinances.WebApi.Application.Interfaces;
 
 public interface IPersonService
 {

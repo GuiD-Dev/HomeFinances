@@ -1,7 +1,7 @@
 using HomeFinances.WebApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HomeFinances.WebApi.Infra.Contexts;
+namespace HomeFinances.WebApi.Infrastructure.Contexts;
 
 public class PgSqlDbContext(DbContextOptions<PgSqlDbContext> options) : DbContext(options)
 {

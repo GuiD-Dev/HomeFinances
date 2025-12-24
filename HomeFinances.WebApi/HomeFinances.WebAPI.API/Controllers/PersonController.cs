@@ -1,5 +1,5 @@
 using HomeFinances.WebApi.Application.DTOs;
-using HomeFinances.WebApi.API.Interfaces;
+using HomeFinances.WebApi.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeFinances.WebApi.API.Controllers;
