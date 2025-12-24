@@ -5,11 +5,8 @@ using HomeFinances.WebApi.Domain.Enums;
 namespace HomeFinances.WebApi.Domain.Entities;
 
 [Table("person")]
-public class Person
+public class Person : BaseEntity
 {
-    [Column("id"), Key]
-    public int Id { get; set; }
-
     [Column("name"), Required]
     public string Name
     {
