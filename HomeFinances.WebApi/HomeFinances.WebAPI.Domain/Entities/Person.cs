@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HomeFinances.WebApi.Domain.Enums;
+using HomeFinances.WebApi.Domain.Exceptions;
 
 namespace HomeFinances.WebApi.Domain.Entities;
 
@@ -14,7 +15,7 @@ public class Person : BaseEntity
         set
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new Exception("Name cannot be empty");
+                throw new DomainException("Name cannot be empty");
 
             field = value;
         }
@@ -27,7 +28,7 @@ public class Person : BaseEntity
         set
         {
             if (value < 0)
-                throw new Exception("Age cannot lower than 0");
+                throw new DomainException("Age cannot lower than 0");
 
             field = value;
         }

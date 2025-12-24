@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using HomeFinances.WebApi.Domain.Enums;
+using HomeFinances.WebApi.Domain.Exceptions;
 
 namespace HomeFinances.WebApi.Domain.Entities;
 
@@ -14,7 +15,7 @@ public class Transaction : BaseEntity
         set
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new ArgumentException("Description cannot be empty");
+                throw new DomainException("Description cannot be empty");
 
             field = value;
         }
@@ -27,7 +28,7 @@ public class Transaction : BaseEntity
         set
         {
             if (value <= 0)
-                throw new ArgumentException("Value must be greater than 0");
+                throw new DomainException("Value must be greater than 0");
 
             field = value;
         }
@@ -41,7 +42,7 @@ public class Transaction : BaseEntity
         set
         {
             if (!Enum.IsDefined(typeof(TransactionType), value))
-                throw new ArgumentException("Invalid Transaction Type");
+                throw new DomainException("Invalid Transaction Type");
 
             field = value;
         }
@@ -59,7 +60,7 @@ public class Transaction : BaseEntity
                 value.Purpose == CategoryPurpose.Expense && Type == TransactionType.Recipe
             )
             {
-                throw new Exception("Transaction Type and Category are incompatible");
+                throw new DomainException("Transaction Type and Category are incompatible");
             }
 
             field = value;
