@@ -3,7 +3,12 @@ import type { Person } from "../types/person";
 const API_URL = "http://localhost:5000";
 
 export async function getPeople(): Promise<Person[]> {
-  const response = await fetch(`${API_URL}/person`);
+  const response = await fetch(`${API_URL}/person/list`);
+  return response.json();
+}
+
+export async function getPeopleAndTransactions(): Promise<Person[]> {
+  const response = await fetch(`${API_URL}/person/list-with-transactions`);
   return response.json();
 }
 

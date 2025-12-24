@@ -10,11 +10,11 @@ export function TransactionPage() {
   const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null)
 
   useEffect(() => {
-    async function fetchTransaction() {
+    async function fetchTransactions() {
       setTransactions(await getTransactions());
     }
 
-    fetchTransaction();
+    fetchTransactions();
   }, []);
 
   async function handleSubmit(transaction: Transaction) {

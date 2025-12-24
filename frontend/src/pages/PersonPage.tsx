@@ -10,11 +10,11 @@ export function PersonPage() {
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null)
 
   useEffect(() => {
-    async function fetchPerson() {
+    async function fetchPeople() {
       setPeople(await getPeople());
     }
 
-    fetchPerson();
+    fetchPeople();
   }, []);
 
   async function handleSubmit(person: Person) {
