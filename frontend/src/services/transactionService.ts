@@ -21,7 +21,7 @@ export async function createTransaction(Transaction: Transaction): Promise<void>
 }
 
 export async function deleteTransaction(id: number) {
-  const response = await fetch(`${API_URL}/transaction`, {
+  const response = await fetch(`${API_URL}/transaction/${id}`, {
     method: "DELETE",
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(id)

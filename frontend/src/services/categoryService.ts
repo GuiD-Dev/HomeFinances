@@ -21,7 +21,7 @@ export async function createCategory(category: Category): Promise<void> {
 }
 
 export async function deleteCategory(id: number) {
-  const response = await fetch(`${API_URL}/category`, {
+  const response = await fetch(`${API_URL}/category/${id}`, {
     method: "DELETE",
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(id)

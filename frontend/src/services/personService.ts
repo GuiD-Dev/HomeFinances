@@ -39,7 +39,7 @@ export async function updatePerson(person: Person) {
 }
 
 export async function deletePerson(id: number) {
-  const response = await fetch(`${API_URL}/person`, {
+  const response = await fetch(`${API_URL}/person/${id}`, {
     method: "DELETE",
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(id)
