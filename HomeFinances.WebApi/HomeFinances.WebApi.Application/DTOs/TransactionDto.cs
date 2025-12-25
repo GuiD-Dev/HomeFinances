@@ -9,7 +9,9 @@ public class TransactionDto
     public decimal Value { get; set; }
     public TransactionType Type { get; set; }
     public int CategoryId { get; set; }
+    public string CategoryDescription { get; set; }
     public int PersonId { get; set; }
+    public string PersonName { get; set; }
 
     public static explicit operator Transaction(TransactionDto dto)
     {
@@ -29,7 +31,9 @@ public class TransactionDto
             Value = entity.Value,
             Type = entity.Type,
             CategoryId = entity.Category.Id,
+            CategoryDescription = entity.Category.Description,
             PersonId = entity.Person.Id,
+            PersonName = entity.Person.Name,
         };
     }
 }
