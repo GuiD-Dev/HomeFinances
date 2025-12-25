@@ -1,14 +1,12 @@
 import type { Transaction } from "../types/transaction";
 
-const API_URL = "http://localhost:5000";
-
 export async function getTransactions(): Promise<Transaction[]> {
-  const response = await fetch(`${API_URL}/transaction`);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction`);
   return response.json();
 }
 
 export async function createTransaction(Transaction: Transaction): Promise<void> {
-  const response = await fetch(`${API_URL}/transaction`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction`, {
     method: "POST",
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(Transaction)
@@ -21,7 +19,7 @@ export async function createTransaction(Transaction: Transaction): Promise<void>
 }
 
 export async function deleteTransaction(id: number) {
-  const response = await fetch(`${API_URL}/transaction/${id}`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/${id}`, {
     method: "DELETE",
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(id)
