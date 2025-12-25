@@ -8,10 +8,15 @@ a {
   border-radius: 1rem;
   padding: 0.5rem;
   font-weight: 700;
-  color: black;
+  color: black !important;
+  text-decoration: none !important;
 }
 
 a:hover {
   background-color: chartreuse;
   color: black;
+}
+
+h1 {
+  text-align: center;
 }

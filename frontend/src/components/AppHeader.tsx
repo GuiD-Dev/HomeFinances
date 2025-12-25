@@ -1,5 +1,5 @@
 import './AppHeader.css'
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 interface Props {
   pageTitle: string
@@ -15,7 +15,7 @@ export function AppHeader({ pageTitle }: Props) {
         <NavLink to="/transaction">Transactions</NavLink>
       </nav>
 
-      <h2>{pageTitle}</h2>
+      <h1 className='mt-5'>{pageTitle}</h1>
     </header>
   );
 }
