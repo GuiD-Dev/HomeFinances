@@ -5,6 +5,7 @@ namespace HomeFinances.WebApi.Application.DTOs;
 
 public class TransactionDto
 {
+    public int Id { get; set; }
     public string Description { get; set; }
     public decimal Value { get; set; }
     public TransactionType Type { get; set; }
@@ -17,6 +18,7 @@ public class TransactionDto
     {
         return new Transaction
         {
+            Id = dto.Id,
             Description = dto.Description,
             Value = dto.Value,
             Type = dto.Type,
@@ -27,6 +29,7 @@ public class TransactionDto
     {
         return new TransactionDto
         {
+            Id = entity.Id,
             Description = entity.Description,
             Value = entity.Value,
             Type = entity.Type,
