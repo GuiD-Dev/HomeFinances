@@ -4,16 +4,24 @@ import { createTransaction, deleteTransaction, getTransactions } from "../servic
 import { AppHeader } from "../components/AppHeader";
 import { TransactionForm } from "../components/TransactionForm";
 import { TransactionTable } from "../components/TransactionTable";
+import type { Category } from "../types/category";
+import { getCategories } from "../services/categoryService";
+import { getPeople } from "../services/personService";
+import type { Person } from "../types/person";
 
 export function TransactionPage() {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    async function fetchTransactions() {
+    async function fetchRegistries() {
       setTransactions(await getTransactions());
+      setCategories(await getCategories());
+      setPeople(await getPeople());
     }
 
-    fetchTransactions();
+    fetchRegistries();
   }, []);
 
   async function handleSubmit(transaction: Transaction) {
@@ -32,7 +40,11 @@ export function TransactionPage() {
     <div>
       <AppHeader pageTitle={"Transaction Registrer"} />
 
-      <TransactionForm onSubmit={handleSubmit} />
+      <TransactionForm
+        categories={categories}
+        people={people}
+        onSubmit={handleSubmit}
+      />
 
       <TransactionTable
         transactions={transactions}

@@ -2,12 +2,16 @@ import { useState } from 'react'
 import type React from 'react'
 import type { Transaction } from '../types/transaction';
 import { Button, Col, Form, Row } from 'react-bootstrap';
+import type { Category } from '../types/category';
+import type { Person } from '../types/person';
 
 interface Props {
+  categories: Category[];
+  people: Person[];
   onSubmit: (person: Omit<Transaction, "id"> | Transaction) => void;
 }
 
-export function TransactionForm({ onSubmit }: Props) {
+export function TransactionForm({ categories, people, onSubmit }: Props) {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState(0);
   const [type, setType] = useState(0);
@@ -74,28 +78,34 @@ export function TransactionForm({ onSubmit }: Props) {
       <Form.Group as={Row}>
         <Form.Label column sm={2}>Category:</Form.Label>
         <Col sm={10}>
-          <Form.Control
-            type='number'
+          <Form.Select
+            defaultValue='0'
             name='category'
-            placeholder='Category'
             value={categoryId}
             onChange={e => setCategoryId(Number(e.target.value))}
-            required
-          />
+          >
+            <option>Choose...</option>
+            {categories.map(category => (
+              <option key={category.id} value={category.id}>{category.description}</option>
+            ))}
+          </Form.Select>
         </Col>
       </Form.Group>
 
       <Form.Group as={Row}>
         <Form.Label column sm={2}>Person:</Form.Label>
         <Col sm={10}>
-          <Form.Control
-            type='number'
+          <Form.Select
+            defaultValue={undefined}
             name='person'
-            placeholder='Person'
             value={personId}
             onChange={e => setPersonId(Number(e.target.value))}
-            required
-          />
+          >
+            <option>Choose...</option>
+            {people.map(person => (
+              <option key={person.id} value={person.id}>{person.name}</option>
+            ))}
+          </Form.Select>
         </Col>
       </Form.Group>
 
