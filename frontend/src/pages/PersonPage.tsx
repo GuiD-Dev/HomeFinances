@@ -24,6 +24,7 @@ export function PersonPage() {
       await updatePerson(person)
 
     setPeople(await getPeople());
+    setSelectedPerson(null);
   }
 
   async function handleDelete(id: number) {
