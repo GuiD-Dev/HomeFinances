@@ -23,7 +23,7 @@ export function PersonTable({ people, onEdit, onDelete }: Props) {
             <td>{person.name}</td>
             <td>{person.age}</td>
             <td>
-              <Button variant='primary' onClick={() => onEdit(person)}>Edit</Button>
+              <Button variant='primary' onClick={() => onEdit(person)} className='mx-1'>Edit</Button>
               <Button variant='danger' onClick={() => onDelete(person.id!)}>Delete</Button>
             </td>
           </tr>

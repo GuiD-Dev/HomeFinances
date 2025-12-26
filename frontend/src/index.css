@@ -1,7 +1,13 @@
 #root {
-  width: 800px;
+  width: 1200px;
   margin: 0 auto;
   padding: 5rem 2rem;
+}
+
+@media (max-width: 1200px) {
+  #root {
+    width: 900px;
+  }
 }
 
 body {

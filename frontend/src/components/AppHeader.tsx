@@ -15,7 +15,7 @@ export function AppHeader({ pageTitle }: Props) {
         <NavLink to="/transaction">Transactions</NavLink>
       </nav>
 
-      <h1 className='mt-5'>{pageTitle}</h1>
+      <h1 className='mt-4'>{pageTitle}</h1>
     </header>
   );
 }

@@ -41,8 +41,8 @@ export function PersonForm({ selectedPerson, onSubmit, onCancelEdit }: Props) {
   return (
     <Form onSubmit={handleSubmit} className='my-4'>
       <Form.Group as={Row}>
-        <Form.Label column sm={2}>Name:</Form.Label>
-        <Col sm={10}>
+        <Form.Label column sm={1}>Name:</Form.Label>
+        <Col sm={9}>
           <Form.Control
             type='text'
             name='name'
@@ -52,11 +52,9 @@ export function PersonForm({ selectedPerson, onSubmit, onCancelEdit }: Props) {
             required
           />
         </Col>
-      </Form.Group>
 
-      <Form.Group as={Row}>
-        <Form.Label column sm={2}>Age:</Form.Label>
-        <Col sm={10}>
+        <Form.Label column sm={1}>Age:</Form.Label>
+        <Col sm={1}>
           <Form.Control
             type='number'
             name='age'
@@ -68,7 +66,7 @@ export function PersonForm({ selectedPerson, onSubmit, onCancelEdit }: Props) {
         </Col>
       </Form.Group>
 
-      <Form.Group as={Row} className="mb-3">
+      <Form.Group as={Row} className="my-2">
         <Button variant="primary" type="submit">
           {selectedPerson ? "Update" : "Save"}
         </Button>

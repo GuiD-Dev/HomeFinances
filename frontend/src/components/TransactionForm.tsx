@@ -34,7 +34,7 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
     <Form onSubmit={handleSubmit} className='my-4'>
       <Form.Group as={Row}>
         <Form.Label column sm={2}>Description:</Form.Label>
-        <Col sm={10}>
+        <Col sm={7}>
           <Form.Control
             type='text'
             name='description'
@@ -44,11 +44,9 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
             required
           />
         </Col>
-      </Form.Group>
 
-      <Form.Group as={Row}>
-        <Form.Label column sm={2}>Value:</Form.Label>
-        <Col sm={10}>
+        <Form.Label column sm={1}>Value:</Form.Label>
+        <Col sm={2}>
           <Form.Control
             type='number'
             name='value'
@@ -60,9 +58,9 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
         </Col>
       </Form.Group>
 
-      <Form.Group as={Row}>
+      <Form.Group as={Row} className="my-1">
         <Form.Label column sm={2}>Type:</Form.Label>
-        <Col sm={10}>
+        <Col sm={2}>
           <Form.Select
             defaultValue='0'
             name='type'
@@ -73,11 +71,9 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
             <option value="1">Expense</option>
           </Form.Select>
         </Col>
-      </Form.Group>
 
-      <Form.Group as={Row}>
-        <Form.Label column sm={2}>Category:</Form.Label>
-        <Col sm={10}>
+        <Form.Label column md={1}>Category:</Form.Label>
+        <Col sm={7}>
           <Form.Select
             defaultValue='0'
             name='category'
@@ -109,7 +105,7 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
         </Col>
       </Form.Group>
 
-      <Form.Group as={Row} className="mb-3">
+      <Form.Group as={Row} className="my-2">
         <Button variant="primary" type="submit">
           Save
         </Button>
