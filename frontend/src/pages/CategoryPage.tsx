@@ -7,7 +7,6 @@ import { AppHeader } from "../components/AppHeader";
 
 export function CategoryPage() {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
 
   useEffect(() => {
     async function fetchCategories() {
@@ -33,11 +32,7 @@ export function CategoryPage() {
     <div>
       <AppHeader pageTitle={"Category Register"} />
 
-      <CategoryForm
-        selectedCategory={selectedCategory}
-        onSubmit={handleSubmit}
-        onCancelEdit={() => setSelectedCategory(null)}
-      />
+      <CategoryForm onSubmit={handleSubmit} />
 
       <CategoryTable
         categories={categories}

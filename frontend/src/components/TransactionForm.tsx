@@ -1,34 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type React from 'react'
 import type { Transaction } from '../types/transaction';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
 interface Props {
-  selectedTransaction?: Transaction | null;
   onSubmit: (person: Omit<Transaction, "id"> | Transaction) => void;
-  onCancelEdit: () => void;
 }
 
-export function TransactionForm({ selectedTransaction, onSubmit }: Props) {
+export function TransactionForm({ onSubmit }: Props) {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState(0);
   const [type, setType] = useState(0);
   const [categoryId, setCategoryId] = useState(0);
   const [personId, setPersonId] = useState(0);
-
-  useEffect(() => {
-    async function initTransaction() {
-      if (selectedTransaction) {
-        setDescription(selectedTransaction.description);
-        setValue(selectedTransaction.value);
-        setType(selectedTransaction.type);
-        setCategoryId(selectedTransaction.categoryId);
-        setPersonId(selectedTransaction.personId);
-      }
-    }
-
-    initTransaction();
-  }, [selectedTransaction])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

@@ -7,7 +7,6 @@ import { TransactionTable } from "../components/TransactionTable";
 
 export function TransactionPage() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null)
 
   useEffect(() => {
     async function fetchTransactions() {
@@ -33,11 +32,7 @@ export function TransactionPage() {
     <div>
       <AppHeader pageTitle={"Transaction Registrer"} />
 
-      <TransactionForm
-        selectedTransaction={selectedTransaction}
-        onSubmit={handleSubmit}
-        onCancelEdit={() => setSelectedTransaction(null)}
-      />
+      <TransactionForm onSubmit={handleSubmit} />
 
       <TransactionTable
         transactions={transactions}
