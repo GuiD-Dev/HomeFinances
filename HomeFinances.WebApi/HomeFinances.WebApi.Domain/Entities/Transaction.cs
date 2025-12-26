@@ -68,5 +68,15 @@ public class Transaction : BaseEntity
     }
 
     [Column("person"), Required]
-    public Person Person { get; set; }
+    public Person Person
+    {
+        get;
+        set
+        {
+            if (value.Age < 18 && Category.Purpose == CategoryPurpose.Recipe)
+                throw new DomainException("Transaction as Recipe cannot be associated to a person under 18 years old");
+
+            field = value;
+        }
+    }
 }
