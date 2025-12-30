@@ -11,13 +11,14 @@ Projeto de desafio técnico para desenvolvedor Fullstack.
 
 ### WebApi
 - Desenvolvido com .NET 10
-- Entity Framework
+- Utiliza Entity Framework
 - Clean Architecture, separado nas camadas:
-    - Domain
-    - Application
-    - API
-    - Infrastructure
-- Domain Driven Design (DDD): centralizando as regras de negócio na camada Domain, priorizando domínios ricos
+    - Domain: onde se concentram as entidades e regras de negócio da aplicação;
+    - Application: onde ficam os serviços que fazem a orquestração das entidades, conversão de DTO para entidade e vice-versa;
+    - API: projeto principal, onde ficam os controllers que são a "porta de entrada" para a API;
+    - Infrastructure: onde ficam as implementações responsáveis pelo acesso ao banco de dados, como DBContext, repositórios e migrations; 
+    - CrossCutting: projeto responsável pelas injeções de dependência. Ele que se preocupa com as referências transversais da aplicação.
+- Foi aplicado conceitos de Domain Driven Design (DDD): centralizando as regras de negócio na camada Domain, priorizando domínios ricos.
 
 ### Frontend
 - Desenvolvido com React 19
