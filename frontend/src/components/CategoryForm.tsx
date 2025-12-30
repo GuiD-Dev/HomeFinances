@@ -42,6 +42,7 @@ export function CategoryForm({ onSubmit }: Props) {
             name='purpose'
             value={purpose}
             onChange={e => setPurpose(Number(e.target.value))}
+            required
           >
             <option value="0">Recipe</option>
             <option value="1">Expense</option>

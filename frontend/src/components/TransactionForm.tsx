@@ -13,21 +13,27 @@ interface Props {
 
 export function TransactionForm({ categories, people, onSubmit }: Props) {
   const [description, setDescription] = useState("");
-  const [value, setValue] = useState(0);
-  const [type, setType] = useState(0);
-  const [categoryId, setCategoryId] = useState(0);
-  const [personId, setPersonId] = useState(0);
+  const [value, setValue] = useState("");
+  const [type, setType] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [personId, setPersonId] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    onSubmit({ description, value, type, categoryId, personId });
+    onSubmit({
+      description,
+      value: Number(value),
+      type: Number(type),
+      categoryId: Number(categoryId),
+      personId: Number(personId),
+    });
 
     setDescription("");
-    setValue(0);
-    setType(0);
-    setCategoryId(0);
-    setPersonId(0);
+    setValue("");
+    setType("");
+    setCategoryId("");
+    setPersonId("");
   }
 
   return (
@@ -52,7 +58,7 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
             name='value'
             placeholder='Value'
             value={value}
-            onChange={e => setValue(Number(e.target.value))}
+            onChange={e => setValue(e.target.value)}
             required
           />
         </Col>
@@ -62,10 +68,11 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
         <Form.Label column sm={2}>Type:</Form.Label>
         <Col sm={2}>
           <Form.Select
-            defaultValue='0'
+            defaultValue={undefined}
             name='type'
             value={type}
-            onChange={e => setType(Number(e.target.value))}
+            onChange={e => setType(e.target.value)}
+            required
           >
             <option value="0">Recipe</option>
             <option value="1">Expense</option>
@@ -75,10 +82,11 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
         <Form.Label column md={1}>Category:</Form.Label>
         <Col sm={7}>
           <Form.Select
-            defaultValue='0'
+            defaultValue={undefined}
             name='category'
             value={categoryId}
-            onChange={e => setCategoryId(Number(e.target.value))}
+            onChange={e => setCategoryId(e.target.value)}
+            required
           >
             <option>Choose...</option>
             {categories.map(category => (
@@ -95,7 +103,8 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
             defaultValue={undefined}
             name='person'
             value={personId}
-            onChange={e => setPersonId(Number(e.target.value))}
+            onChange={e => setPersonId(e.target.value)}
+            required
           >
             <option>Choose...</option>
             {people.map(person => (
