@@ -1,3 +1,4 @@
+using AutoMapper;
 using HomeFinances.WebApi.Application.DTOs;
 using HomeFinances.WebApi.Application.Interfaces;
 using HomeFinances.WebApi.Domain.Entities;
@@ -5,21 +6,22 @@ using HomeFinances.WebApi.Domain.Entities;
 namespace HomeFinances.WebApi.Application.Services;
 
 public class TransactionService(
-    IPersonRepository personRepository, ICategoryRepository categoryRepository, ITransactionRepository transactionRepository
+    IPersonRepository personRepository, ICategoryRepository categoryRepository, ITransactionRepository transactionRepository, IMapper mapper
 ) : ITransactionService
 {
   public async Task<IEnumerable<TransactionDto>> ListTransactionsAsync()
   {
-    return (await transactionRepository.GetManyAsync())
-        .Select(transaction => (TransactionDto)transaction);
+    var transactions = await transactionRepository.GetManyAsync();
+    return mapper.Map<IEnumerable<TransactionDto>>(transactions);
   }
 
-  public async Task<Transaction> GetTransactionAsync(int id)
+  public async Task<TransactionDto> GetTransactionAsync(int id)
   {
-    return await transactionRepository.GetOneByIdAsync(id);
+    var transaction = await transactionRepository.GetOneByIdAsync(id);
+    return mapper.Map<TransactionDto>(transaction);
   }
 
-  public async Task<TransactionDto> InsertTransactionAsync(TransactionDto dto)
+  public async Task<TransactionDto> InsertTransactionAsync(TransactionRequestDto dto)
   {
     var category = await categoryRepository.GetOneByIdAsync(dto.CategoryId);
     if (category is null)
@@ -29,11 +31,13 @@ public class TransactionService(
     if (person is null)
       throw new Exception("Person not found");
 
-    var transaction = (Transaction)dto;
+    var transaction = mapper.Map<Transaction>(dto);
     transaction.SetCategory(category);
     transaction.SetPerson(person);
 
-    return (TransactionDto)await transactionRepository.InsertAsync(transaction);
+    await transactionRepository.InsertAsync(transaction);
+
+    return mapper.Map<TransactionDto>(transaction);
   }
 
   public async Task<bool> DeleteTransactionAsync(int id)

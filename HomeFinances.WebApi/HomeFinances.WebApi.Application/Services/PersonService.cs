@@ -1,31 +1,35 @@
+using AutoMapper;
 using HomeFinances.WebApi.Application.DTOs;
 using HomeFinances.WebApi.Application.Interfaces;
 using HomeFinances.WebApi.Domain.Entities;
 
 namespace HomeFinances.WebApi.Application.Services;
 
-public class PersonService(IPersonRepository personRepository) : IPersonService
+public class PersonService(IPersonRepository personRepository, IMapper mapper) : IPersonService
 {
     public async Task<IEnumerable<PersonDto>> ListPeopleAsync()
     {
-        return (await personRepository.GetManyAsync())
-            .Select(person => (PersonDto)person);
+        var people = await personRepository.GetManyAsync();
+        return mapper.Map<IEnumerable<PersonDto>>(people);
     }
 
     public async Task<IEnumerable<PersonDto>> ListPeopleWithTransactionsAsync()
     {
-        return (await personRepository.GetManyAsync(includeTransactions: true))
-            .Select(person => (PersonDto)person);
+        var people = await personRepository.GetManyAsync(includeTransactions: true);
+        return mapper.Map<IEnumerable<PersonDto>>(people);
     }
 
-    public async Task<Person> GetPersonAsync(int id)
+    public async Task<PersonDto> GetPersonAsync(int id)
     {
-        return await personRepository.GetOneByIdAsync(id);
+        var person = await personRepository.GetOneByIdAsync(id, includeTransactions: true);
+        return mapper.Map<PersonDto>(person);
     }
 
     public async Task<PersonDto> InsertPersonAsync(PersonDto dto)
     {
-        return (PersonDto)await personRepository.InsertAsync((Person)dto);
+        var person = mapper.Map<Person>(dto);
+        await personRepository.InsertAsync(person);
+        return mapper.Map<PersonDto>(person);
     }
 
     public async Task<PersonDto> UpdatePersonAsync(PersonDto dto)
@@ -33,10 +37,10 @@ public class PersonService(IPersonRepository personRepository) : IPersonService
         var person = await personRepository.GetOneByIdAsync(dto.Id, asNoTracking: true, includeTransactions: true);
         if (person is null) throw new Exception("Id not found");
 
-        person.Update((Person)dto);
+        person.Update(mapper.Map<Person>(dto));
 
         await personRepository.UpdateAsync(person);
-        return dto;
+        return mapper.Map<PersonDto>(person);
     }
 
     public async Task<bool> DeletePersonAsync(int id)
