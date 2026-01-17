@@ -8,29 +8,20 @@ namespace HomeFinances.WebApi.Domain.Entities;
 [Table("category")]
 public class Category : BaseEntity
 {
-    [Column("description"), Required]
-    public string Description
-    {
-        get;
-        set
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                throw new DomainException("Description cannot be empty");
+	[Column("description"), Required]
+	public string Description { get; private set; }
 
-            field = value;
-        }
-    }
+	[Column("purpose"), Required]
+	public CategoryPurpose Purpose { get; private set; }
 
-    [Column("purpose"), Required]
-    public CategoryPurpose Purpose
-    {
-        get;
-        set
-        {
-            if (!Enum.IsDefined(typeof(CategoryPurpose), value))
-                throw new DomainException("Invalid purpose");
+	public Category(string description, CategoryPurpose purpose)
+	{
+		DomainException.ThrowsWhen([
+			(string.IsNullOrWhiteSpace(description), "Description cannot be empty"),
+			(!Enum.IsDefined(typeof(CategoryPurpose), purpose), "Invalid purpose"),
+		]);
 
-            field = value;
-        }
-    }
+		Description = description;
+		Purpose = purpose;
+	}
 }

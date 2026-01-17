@@ -4,41 +4,39 @@ namespace HomeFinances.WebApi.Application.DTOs;
 
 public class PersonDto
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public int Age { get; set; }
-    public IEnumerable<TransactionDto> Transactions { get; set; }
-    public decimal Recipes { get; set; }
-    public decimal Expenses { get; set; }
-    public decimal Balance { get; set; }
+  public int Id { get; set; }
+  public string Name { get; set; }
+  public int Age { get; set; }
+  public IEnumerable<TransactionDto> Transactions { get; set; }
+  public decimal Recipes { get; set; }
+  public decimal Expenses { get; set; }
+  public decimal Balance { get; set; }
 
-    public static explicit operator Person(PersonDto dto)
+  public static explicit operator Person(PersonDto dto)
+  {
+    return new Person(dto.Name, dto.Age)
     {
-        return new Person
-        {
-            Id = dto.Id,
-            Name = dto.Name,
-            Age = dto.Age,
-        };
-    }
+      Id = dto.Id,
+    };
+  }
 
-    public static explicit operator PersonDto(Person entity)
+  public static explicit operator PersonDto(Person entity)
+  {
+    return new PersonDto
     {
-        return new PersonDto
+      Id = entity.Id,
+      Name = entity.Name,
+      Age = entity.Age,
+      Transactions = entity.Transactions?
+        .Select(transaction => new TransactionDto
         {
-            Id = entity.Id,
-            Name = entity.Name,
-            Age = entity.Age,
-            Transactions = entity.Transactions?
-                .Select(transaction => new TransactionDto
-                {
-                    Description = transaction.Description,
-                    Value = transaction.Value,
-                    Type = transaction.Type,
-                }) ?? [],
-            Recipes = entity.Recipes,
-            Expenses = entity.Expenses,
-            Balance = entity.Balance,
-        };
-    }
+          Description = transaction.Description,
+          Value = transaction.Value,
+          Type = transaction.Type,
+        }) ?? [],
+      Recipes = entity.Recipes,
+      Expenses = entity.Expenses,
+      Balance = entity.Balance,
+    };
+  }
 }

@@ -5,27 +5,25 @@ namespace HomeFinances.WebApi.Application.DTOs;
 
 public class CategoryDto
 {
-    public int Id { get; set; }
-    public string Description { get; set; }
-    public CategoryPurpose Purpose { get; set; }
+  public int Id { get; set; }
+  public string Description { get; set; }
+  public CategoryPurpose Purpose { get; set; }
 
-    public static explicit operator Category(CategoryDto dto)
+  public static explicit operator Category(CategoryDto dto)
+  {
+    return new Category(dto.Description, dto.Purpose)
     {
-        return new Category
-        {
-            Id = dto.Id,
-            Description = dto.Description,
-            Purpose = dto.Purpose,
-        };
-    }
+      Id = dto.Id,
+    };
+  }
 
-    public static explicit operator CategoryDto(Category entity)
+  public static explicit operator CategoryDto(Category entity)
+  {
+    return new CategoryDto
     {
-        return new CategoryDto
-        {
-            Id = entity.Id,
-            Description = entity.Description,
-            Purpose = entity.Purpose,
-        };
-    }
+      Id = entity.Id,
+      Description = entity.Description,
+      Purpose = entity.Purpose,
+    };
+  }
 }
