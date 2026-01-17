@@ -15,6 +15,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddDependencies(builder.Configuration);
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Garantir que as migrations sejam aplicadas automaticamente ao iniciar a aplicação.
