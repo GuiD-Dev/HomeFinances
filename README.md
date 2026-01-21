@@ -1,104 +1,65 @@
 # Home Finances
 
-Projeto de desafio técnico para desenvolvedor Fullstack.
+An application to registry incomes and expenses in order to manage a home finances.
 
-**OBS**: a documentação estará em português para facilitar a avaliação
+## Project Stack and Details
 
-**OBS 2**: o exercício opcional não foi feito
-
-
-## Sobre o projeto
-
-### WebApi
-- Desenvolvido com .NET 10
-- Utiliza Entity Framework
-- Clean Architecture, separado nas camadas:
-    - Domain: onde se concentram as entidades e regras de negócio da aplicação;
-    - Application: onde ficam os serviços que fazem a orquestração das entidades, conversão de DTO para entidade e vice-versa;
-    - API: projeto principal, onde ficam os controllers que são a "porta de entrada" para a API;
-    - Infrastructure: onde ficam as implementações responsáveis pelo acesso ao banco de dados, como DBContext, repositórios e migrations; 
-    - CrossCutting: projeto responsável pelas injeções de dependência. Ele que se preocupa com as referências transversais da aplicação.
-- Foi aplicado conceitos de Domain Driven Design (DDD): centralizando as regras de negócio na camada Domain, priorizando domínios ricos.
-
-### Frontend
-- Desenvolvido com React 19
-- Uso do pacote react-bootstrap para interface gráfica
-- Vite como bundler do projeto
+- .NET 10
+- Entity Framework
+- Clean Architecture
+- PostgreSQL
+- Docker
+- React 19
 
 
-## Como executar o projeto
+## How to run the project
 
-Recomenda-se utilizar o docker para executar uma instância do banco de dados. A seguir, comandos para auxiliar a instalação do docker em ambiente linux:
 ```bash
-curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh ./get-docker.sh --dry-run
+# Build webapi docker image
+docker build -f docker/webapi.dockerfile -t home-finances-webapi .
+
+# Run entire application with docker compose
+docker compose -f docker/docker-compose.yml up -d
 ```
 
-A seguir, o passo a passo para execução do projeto:
-```bash
-# Executar container docker do PostgreSQL
-docker run -p 5432:5432 -e POSTGRES_PASSWORD=1234 --name postgres -d postgres:18
 
-# Executar a WebApi
-dotnet watch --project HomeFinances.WebApi/HomeFinances.WebApi.Infrastructure
+## Requirements
 
-# Para o frontend é necessário antes criar um arquivo .env (variáveis de ambiente), dentro da pasta frontend, com a seguinte linha:
-VITE_API_URL=http://localhost:5000
+### Person Registry
 
-# Depois abra outra janela do terminal e execute o projeto
-cd ./frontend/
-npm i
-npm run dev
-```
+- A registry must be implemented containing the basic management fuctionalities: creation and listing.
+- On delete cases, all person transactions must be erased.
+- The category record must contain:
+    - Identifier (an unique value, automatically generated)
+    - Description
+    - Age (positive integer)
 
-## Funcionalidades
+### Category Registry
 
-**Cadastro de pessoas (veja em src/pages/PersonPage no frontend e PersonController na webapi):**
+- A registry must be implemented containing the basic management fuctionalities: creation and listing.
+- The category record must contain:
+    - Identifier (an unique value, automatically generated)
+    - Description
+    - Purpose (income/expense/both)
 
-Deverá ser implementado um cadastro contendo as funcionalidades básicas de gerenciamento: criação, deleção e listagem.
+### Transaction registry
 
-Em casos que se delete uma pessoa, todas a transações dessa pessoa deverão ser apagadas.
+- A registry must be implemented containing the basic management functionalities: creation and listing.
+- If the user informs a minor (under 18), only expenses must be accepted.
+- The transaction record must contain:
+    - Identifier (an unique value, automatically generated)
+    - Description
+    - Value (positive decimal)
+    - Kind (income/expense)
+    - Category (restrict the use of categories according to the value defined on field *Purpose*)
+    - Person
 
-O cadastro de pessoa deverá conter:
-- Identificador (deve ser um valor único gerado automaticamente);
-- Nome (texto);
-- Idade (número inteiro positivo);
+### Query totals by person
 
+- It must list all registered people, displaying the total incomes, expenses and balance (income - expense) of each one.
+- At the end of the previous list, it should display the grand total of all people, including total incomes, total expenses and net balance.
 
-**Cadastro de categorias (veja em src/pages/CategoryPage no frontend e CategoryController na webapi):**
+### Query totals by category
 
-Deverá ser implementado um cadastro contendo as funcionalidades básicas de gerenciamento: criação e listagem.
-
-O cadastro de categoria deverá conter:
-- Identificador (deve ser um valor único gerado automaticamente);
-- Descrição (texto);
-- Finalidade (despesa/receita/ambas)
-
-
-**Cadastro de transações (veja em src/pages/TransactionPage no frontend e TransactionController na webapi):**
-
-Deverá ser implementado um cadastro contendo as funcionalidades básicas de gerenciamento: criação e listagem.
-
-Caso o usuário informe um menor de idade (menor de 18), apenas despesas deverão ser aceitas.
-
-O cadastro de transação deverá conter:
-- Identificador (deve ser um valor único gerado automaticamente);
-- Descrição (texto);
-- Valor (número decimal positivo);
-- Tipo (despesa/receita);
-- Categoria: restringir a utilização de categorias conforme o valor definido no campo finalidade. Ex.: se o tipo da transação é despesa, não poderá utilizar uma categoria que tenha a finalidade receita.
-- Pessoa (identificador da pessoa do cadastro anterior);
-
-
-**Consulta de totais por pessoa (veja em src/pages/HomePage no frontend e PersonController na webapi):**
-
-Deverá listar todas as pessoas cadastradas, exibindo o total de receitas, despesas e o saldo (receita – despesa) de cada uma.
-
-Ao final da listagem anterior, deverá exibir o total geral de todas as pessoas incluindo o total de receitas, total de despesas e o saldo líquido.
-
-
-**Consulta de totais por categoria (não implementado):**
-
-Deverá listar todas as categorias cadastradas, exibindo o total de receitas, despesas e o saldo (receita – despesa) de cada uma.
-
-Ao final da listagem anterior, deverá exibir o total geral de todas as categorias incluindo o total de receitas, total de despesas e o saldo líquido.
+- It must list all registered categories, displaying the total incomes, expenses and balance (income - expense) of each one.
+- At the end of the previous list, it should display the grand total of all categories, including total incomes, total expenses and net balance.
