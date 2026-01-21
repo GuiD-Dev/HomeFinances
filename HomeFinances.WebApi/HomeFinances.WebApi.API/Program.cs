@@ -6,9 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-        policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
-    );
+  options.AddDefaultPolicy(
+    policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+  );
 });
 
 builder.Services.AddControllers();
@@ -17,11 +17,10 @@ builder.Services.AddDependencies(builder.Configuration);
 
 var app = builder.Build();
 
-// Garantir que as migrations sejam aplicadas automaticamente ao iniciar a aplicação.
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<PgSqlDbContext>();
-    db.Database.Migrate();
+  var db = scope.ServiceProvider.GetRequiredService<PgSqlDbContext>();
+  db.Database.Migrate();
 }
 
 app.UseCors();
