@@ -1,17 +1,11 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using HomeFinances.WebApi.Domain.Enums;
 using HomeFinances.WebApi.Domain.Exceptions;
 
 namespace HomeFinances.WebApi.Domain.Entities;
 
-[Table("person")]
 public class Person : BaseEntity
 {
-	[Column("name"), Required]
 	public string Name { get; private set; }
-
-	[Column("age"), Required]
 	public int Age { get; private set; }
 
 	public virtual ICollection<Transaction> Transactions { get; set; }

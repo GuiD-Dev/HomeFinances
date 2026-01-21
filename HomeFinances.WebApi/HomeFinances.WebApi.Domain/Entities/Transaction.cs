@@ -1,26 +1,16 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using HomeFinances.WebApi.Domain.Enums;
 using HomeFinances.WebApi.Domain.Exceptions;
 
 namespace HomeFinances.WebApi.Domain.Entities;
 
-[Table("transaction")]
 public class Transaction : BaseEntity
 {
-  [Column("description"), Required]
   public string Description { get; private set; }
-
-  [Column("value"), Required]
   public decimal Value { get; private set; }
-
-  [Column("type"), Required]
   public TransactionType Type { get; private set; }
-
-  [Column("category"), Required]
+  public int CategoryId { get; private set; }
   public Category Category { get; private set; }
-
-  [Column("person"), Required]
+  public int PersonId { get; private set; }
   public Person Person { get; private set; }
 
   public Transaction(string description, decimal value, TransactionType type)
