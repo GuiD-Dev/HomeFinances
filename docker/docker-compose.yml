@@ -1,0 +1,18 @@
+services:
+  database:
+    image: postgres:18
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: 1234
+    network_mode: host
+
+  webapi:
+    image: home-finances-webapi:latest
+    ports:
+      - 5000:5000
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      - database
+    network_mode: host
