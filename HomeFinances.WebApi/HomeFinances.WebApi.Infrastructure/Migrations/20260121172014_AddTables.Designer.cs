@@ -8,10 +8,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace HomeFinances.WebApi.Migrations
+namespace HomeFinances.WebApi.Infrastructure.Migrations
 {
     [DbContext(typeof(PgSqlDbContext))]
-    [Migration("20251223130309_AddTables")]
+    [Migration("20260121172014_AddTables")]
     partial class AddTables
     {
         /// <inheritdoc />
@@ -35,16 +35,16 @@ namespace HomeFinances.WebApi.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("description");
 
-                    b.Property<int>("Purpose")
-                        .HasColumnType("integer")
+                    b.Property<short>("Purpose")
+                        .HasColumnType("smallint")
                         .HasColumnName("purpose");
 
                     b.HasKey("Id");
 
-                    b.ToTable("category");
+                    b.ToTable("category", (string)null);
                 });
 
             modelBuilder.Entity("HomeFinances.WebApi.Domain.Entities.Person", b =>
@@ -56,18 +56,18 @@ namespace HomeFinances.WebApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Age")
-                        .HasColumnType("integer")
+                    b.Property<short>("Age")
+                        .HasColumnType("smallint")
                         .HasColumnName("age");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("person");
+                    b.ToTable("person", (string)null);
                 });
 
             modelBuilder.Entity("HomeFinances.WebApi.Domain.Entities.Transaction", b =>
@@ -80,22 +80,24 @@ namespace HomeFinances.WebApi.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int")
+                        .HasColumnName("category_id");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("description");
 
                     b.Property<int>("PersonId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int")
+                        .HasColumnName("person_id");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("integer")
+                    b.Property<short>("Type")
+                        .HasColumnType("smallint")
                         .HasColumnName("type");
 
                     b.Property<decimal>("Value")
-                        .HasColumnType("numeric")
+                        .HasColumnType("decimal(18,2)")
                         .HasColumnName("value");
 
                     b.HasKey("Id");
@@ -104,7 +106,7 @@ namespace HomeFinances.WebApi.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("transaction");
+                    b.ToTable("transaction", (string)null);
                 });
 
             modelBuilder.Entity("HomeFinances.WebApi.Domain.Entities.Transaction", b =>

@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace HomeFinances.WebApi.Migrations
+namespace HomeFinances.WebApi.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddTables : Migration
@@ -17,8 +17,8 @@ namespace HomeFinances.WebApi.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    purpose = table.Column<int>(type: "integer", nullable: false)
+                    description = table.Column<string>(type: "varchar(50)", nullable: false),
+                    purpose = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,8 +31,8 @@ namespace HomeFinances.WebApi.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    age = table.Column<int>(type: "integer", nullable: false)
+                    name = table.Column<string>(type: "varchar(50)", nullable: false),
+                    age = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,38 +45,38 @@ namespace HomeFinances.WebApi.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    value = table.Column<decimal>(type: "numeric", nullable: false),
-                    type = table.Column<int>(type: "integer", nullable: false),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    PersonId = table.Column<int>(type: "integer", nullable: false)
+                    description = table.Column<string>(type: "varchar(255)", nullable: false),
+                    value = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    type = table.Column<short>(type: "smallint", nullable: false),
+                    category_id = table.Column<int>(type: "int", nullable: false),
+                    person_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_transaction", x => x.id);
                     table.ForeignKey(
-                        name: "FK_transaction_category_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_transaction_category_category_id",
+                        column: x => x.category_id,
                         principalTable: "category",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_transaction_person_PersonId",
-                        column: x => x.PersonId,
+                        name: "FK_transaction_person_person_id",
+                        column: x => x.person_id,
                         principalTable: "person",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_transaction_CategoryId",
+                name: "IX_transaction_category_id",
                 table: "transaction",
-                column: "CategoryId");
+                column: "category_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_transaction_PersonId",
+                name: "IX_transaction_person_id",
                 table: "transaction",
-                column: "PersonId");
+                column: "person_id");
         }
 
         /// <inheritdoc />
