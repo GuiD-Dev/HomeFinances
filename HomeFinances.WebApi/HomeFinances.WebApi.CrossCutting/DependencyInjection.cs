@@ -13,7 +13,7 @@ public static class DependencyInjection
   public static IServiceCollection AddDependencies(this IServiceCollection services, IConfiguration configuration)
   {
     services.AddDbContext<PgSqlDbContext>(options =>
-      options.UseNpgsql(configuration["PgSQlConnection:PgSQlConnectionString"])
+      options.UseNpgsql(configuration["ConnectionStrings:PgSQlConnectionString"])
     );
 
     services.AddScoped<IPersonService, PersonService>();
