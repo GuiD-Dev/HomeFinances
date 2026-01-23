@@ -17,3 +17,11 @@ services:
     depends_on:
       - database
 
+  frontend:
+    image: home-finances-frontend:latest
+    ports:
+      - 4000:4000
+    environment:
+      VITE_API_URL: http://localhost:5000
+    depends_on:
+      - webapi

@@ -15,11 +15,12 @@ An application to registry incomes and expenses in order to manage a home financ
 ## How to run the project
 
 ```bash
-# Build webapi docker image
-docker build -f docker/webapi.dockerfile -t home-finances-webapi .
+# Build webapi and frontend docker images
+docker build --no-cache -f docker/webapi.dockerfile -t home-finances-webapi .
+docker build --no-cache -f docker/frontend.dockerfile -t home-finances-frontend .
 
 # Run entire application with docker compose
-docker compose -f docker/docker-compose.yml up -d
+docker compose -f docker/docker-compose.yml up
 ```
 
 
