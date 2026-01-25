@@ -1,15 +1,15 @@
 import { Table } from "react-bootstrap";
 import type { Person } from "../types/person";
-import styles from "./PeopleTable.module.css";
+import styles from "./Dashboard.module.css";
 
-interface PeopleTableProps {
+interface DashboardProps {
   people: Person[];
   totalRecipes: number;
   totalExpenses: number;
   totalBalance: number;
 }
 
-export function PeopleTable({ people, totalRecipes, totalExpenses, totalBalance }: PeopleTableProps) {
+export function Dashboard({ people, totalRecipes, totalExpenses, totalBalance }: DashboardProps) {
   return (
     <Table striped bordered hover size="md">
       <thead>

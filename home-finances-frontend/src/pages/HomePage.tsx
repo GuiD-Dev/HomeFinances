@@ -2,8 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { AppHeader } from "../components/AppHeader";
 import { getPeopleAndTransactions } from "../services/personService";
 import type { Person } from "../types/person";
-import styles from "./HomePage.module.css";
-import { PeopleTable } from "../components/PeopleTable";
+import { Dashboard } from "../components/Dashboard";
 
 export function HomePage() {
   const [people, setPeople] = useState<Person[]>([]);
@@ -53,7 +52,7 @@ export function HomePage() {
     return (
       <div>
         <AppHeader pageTitle={"Totals per Person"} />
-        <p className={styles.danger}>{error}</p>
+        <p style={{ color: 'red' }}>{error}</p>
       </div>
     );
   }
@@ -61,7 +60,8 @@ export function HomePage() {
   return (
     <div>
       <AppHeader pageTitle={"Totals per Person"} />
-      <PeopleTable
+
+      <Dashboard
         people={people}
         totalRecipes={totalRecipes}
         totalExpenses={totalExpenses}
