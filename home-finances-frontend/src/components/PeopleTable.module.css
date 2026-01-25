@@ -1,0 +1,21 @@
+.success {
+  color: green;
+}
+
+.danger {
+  color: red;
+}
+
+.balanceSuccess {
+  background-color: green;
+  font-weight: 700;
+}
+
+.balanceDanger {
+  background-color: red;
+  font-weight: 700;
+}
+
+.summary {
+  background-color: lightblue;
+}
