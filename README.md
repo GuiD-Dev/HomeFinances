@@ -1,6 +1,6 @@
 # Home Finances
 
-An application to registry incomes and expenses in order to manage a home finances.
+An application to registry incomes and expenses in order to manage home finances.
 
 ## Project Stack and Details
 
@@ -60,7 +60,7 @@ docker compose -f docker/docker-compose.yml up
 - It must list all registered people, displaying the total incomes, expenses and balance (income - expense) of each one.
 - At the end of the previous list, it should display the grand total of all people, including total incomes, total expenses and net balance.
 
-### Query totals by category
+### Query totals by category (working progress...)
 
 - It must list all registered categories, displaying the total incomes, expenses and balance (income - expense) of each one.
 - At the end of the previous list, it should display the grand total of all categories, including total incomes, total expenses and net balance.
