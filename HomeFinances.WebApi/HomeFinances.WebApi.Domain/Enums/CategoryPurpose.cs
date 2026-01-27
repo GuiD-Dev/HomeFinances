@@ -2,7 +2,7 @@ namespace HomeFinances.WebApi.Domain.Enums;
 
 public enum CategoryPurpose
 {
-    Recipe,
+    Income,
     Expense,
     Both
 }

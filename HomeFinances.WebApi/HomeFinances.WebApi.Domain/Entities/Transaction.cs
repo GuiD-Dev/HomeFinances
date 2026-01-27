@@ -30,9 +30,9 @@ public class Transaction : BaseEntity
   {
     DomainException.ThrowsWhen([
       (
-        (category.Purpose == CategoryPurpose.Recipe && Type == TransactionType.Expense)
+        (category.Purpose == CategoryPurpose.Income && Type == TransactionType.Expense)
         ||
-        (category.Purpose == CategoryPurpose.Expense && Type == TransactionType.Recipe),
+        (category.Purpose == CategoryPurpose.Expense && Type == TransactionType.Income),
         "Transaction Type and Category are incompatible"
       ),
     ]);
@@ -43,7 +43,7 @@ public class Transaction : BaseEntity
   public void SetPerson(Person person)
   {
     DomainException.ThrowsWhen([
-      (person.Age < 18 && Category.Purpose == CategoryPurpose.Recipe, "Transaction as Recipe cannot be associated to a person under 18 years old"),
+      (person.Age < 18 && Category.Purpose == CategoryPurpose.Income, "Transaction as Income cannot be associated to a person under 18 years old"),
     ]);
 
     Person = person;

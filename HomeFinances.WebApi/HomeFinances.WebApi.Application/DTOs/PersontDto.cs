@@ -8,7 +8,7 @@ public class PersonDto
   public string Name { get; set; }
   public int Age { get; set; }
   public IEnumerable<TransactionDto> Transactions { get; set; }
-  public decimal Recipes { get; set; }
+  public decimal Incomes { get; set; }
   public decimal Expenses { get; set; }
   public decimal Balance { get; set; }
 
@@ -34,7 +34,7 @@ public class PersonDto
           Value = transaction.Value,
           Type = transaction.Type,
         }) ?? [],
-      Recipes = entity.Recipes,
+      Incomes = entity.Incomes,
       Expenses = entity.Expenses,
       Balance = entity.Balance,
     };

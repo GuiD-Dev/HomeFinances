@@ -10,9 +10,9 @@ public class Person : BaseEntity
 
 	public virtual ICollection<Transaction> Transactions { get; set; }
 
-	public decimal Recipes => Transactions?.Where(t => t.Type == TransactionType.Recipe)?.Sum(t => t.Value) ?? 0m;
+	public decimal Incomes => Transactions?.Where(t => t.Type == TransactionType.Income)?.Sum(t => t.Value) ?? 0m;
 	public decimal Expenses => Transactions?.Where(t => t.Type == TransactionType.Expense)?.Sum(t => t.Value) ?? 0m;
-	public decimal Balance => Recipes - Expenses;
+	public decimal Balance => Incomes - Expenses;
 
 	public Person(string name, int age)
 	{
@@ -30,7 +30,7 @@ public class Person : BaseEntity
 	{
 		DomainException.ThrowsWhen([
 			(data.Age < 0, "Age cannot lower than 0"),
-			(data.Age < 18 && Recipes > 0, "Person with Recipes cannot have less than 18 years old"),
+			(data.Age < 18 && Incomes > 0, "Person with Incomes cannot have less than 18 years old"),
 		]);
 
 		Name = data.Name;
