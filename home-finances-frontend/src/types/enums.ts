@@ -1,10 +1,10 @@
 export enum CategoryPurpose {
-  Recipe,
+  Income,
   Expense,
   Both,
 }
 
 export enum TransactionType {
-  Recipe,
+  Income,
   Expense,
 }

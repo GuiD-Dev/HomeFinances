@@ -25,7 +25,7 @@ export function TransactionTable({ transactions, onDelete }: Props) {
           <tr key={transaction.id}>
             <td>{transaction.description}</td>
             <td>{transaction.value}</td>
-            <td>{transaction.type === TransactionType.Recipe ? "Recipe" : "Expense"}</td>
+            <td>{transaction.type === TransactionType.Income ? "Income" : "Expense"}</td>
             <td>{transaction.categoryDescription}</td>
             <td>{transaction.personName}</td>
             <td>

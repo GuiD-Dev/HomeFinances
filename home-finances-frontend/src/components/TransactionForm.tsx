@@ -74,7 +74,7 @@ export function TransactionForm({ categories, people, onSubmit }: Props) {
             onChange={e => setType(e.target.value)}
             required
           >
-            <option value="0">Recipe</option>
+            <option value="0">Income</option>
             <option value="1">Expense</option>
           </Form.Select>
         </Col>

@@ -44,7 +44,7 @@ export function CategoryForm({ onSubmit }: Props) {
             onChange={e => setPurpose(Number(e.target.value))}
             required
           >
-            <option value="0">Recipe</option>
+            <option value="0">Income</option>
             <option value="1">Expense</option>
             <option value="2">Both</option>
           </Form.Select>

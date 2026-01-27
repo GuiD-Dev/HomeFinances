@@ -21,8 +21,8 @@ export function CategoryTable({ categories, onDelete }: Props) {
         {categories.map(category => (
           <tr key={category.id}>
             <td>{category.description}</td>
-            <td>{category.purpose === CategoryPurpose.Recipe
-              ? "Recipe"
+            <td>{category.purpose === CategoryPurpose.Income
+              ? "Income"
               : category.purpose === CategoryPurpose.Expense
                 ? "Expense"
                 : "Both"

@@ -9,15 +9,15 @@ export function HomePage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { totalRecipes, totalExpenses, totalBalance } = useMemo(() => {
+  const { totalIncomes, totalExpenses, totalBalance } = useMemo(() => {
     return people.reduce(
       (totals, person) => {
-        totals.totalRecipes += person.recipes;
+        totals.totalIncomes += person.incomes;
         totals.totalExpenses += person.expenses;
         totals.totalBalance += person.balance;
         return totals;
       },
-      { totalRecipes: 0, totalExpenses: 0, totalBalance: 0 }
+      { totalIncomes: 0, totalExpenses: 0, totalBalance: 0 }
     );
   }, [people]);
 
@@ -59,11 +59,11 @@ export function HomePage() {
 
   return (
     <div>
-      <AppHeader pageTitle={"Totals per Person"} />
+      <AppHeader pageTitle={""} />
 
       <Dashboard
         people={people}
-        totalRecipes={totalRecipes}
+        totalIncomes={totalIncomes}
         totalExpenses={totalExpenses}
         totalBalance={totalBalance}
       />
