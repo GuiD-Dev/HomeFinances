@@ -3,16 +3,18 @@ nav {
   justify-content: space-evenly;
 }
 
-a {
+.tab {
   background-color: cadetblue;
-  border-radius: 1rem;
+  border-radius: 0.8rem 0.8rem 0rem 0rem;
   padding: 0.5rem;
   font-weight: 700;
   color: black !important;
   text-decoration: none !important;
+  width: 100%;
+  text-align: center;
 }
 
-a:hover {
+.tab:hover {
   background-color: chartreuse;
   color: black;
 }
