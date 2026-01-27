@@ -1,4 +1,4 @@
-import { Table } from "react-bootstrap";
+import { Card, Table } from "react-bootstrap";
 import type { Person } from "../types/person";
 import styles from "./Dashboard.module.css";
 
@@ -6,12 +6,35 @@ interface DashboardProps {
   people: Person[];
   totalIncomes: number;
   totalExpenses: number;
-  totalBalance: number;
+  netBalance: number;
 }
 
-export function Dashboard({ people, totalIncomes, totalExpenses, totalBalance }: DashboardProps) {
+export function Dashboard({ people, totalIncomes, totalExpenses, netBalance }: DashboardProps) {
   return (
     <>
+      <div className={styles.cardsContainer}>
+        <Card bg="primary" className={styles.card}>
+          <Card.Body>
+            <Card.Title style={{ fontWeight: 'bold' }}>Total Incomes</Card.Title>
+            <Card.Title style={{ fontWeight: 'bold' }}>R$ {totalIncomes}</Card.Title>
+          </Card.Body>
+        </Card>
+
+        <Card bg="warning" className={styles.card}>
+          <Card.Body>
+            <Card.Title style={{ fontWeight: 'bold' }}>Total Expenses</Card.Title>
+            <Card.Title style={{ fontWeight: 'bold' }}>R$ {totalExpenses}</Card.Title>
+          </Card.Body>
+        </Card>
+
+        <Card bg="info" className={styles.card}>
+          <Card.Body>
+            <Card.Title style={{ fontWeight: 'bold' }}>Net Balance</Card.Title>
+            <Card.Title style={{ fontWeight: 'bold' }}>R$ {netBalance}</Card.Title>
+          </Card.Body>
+        </Card>
+      </div>
+
       <Table striped bordered hover size="md">
         <thead>
           <tr>
@@ -37,14 +60,6 @@ export function Dashboard({ people, totalIncomes, totalExpenses, totalBalance }:
             </tr>
           ))}
         </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan={2} className={styles.summary}>Summary</td>
-            <td>{totalIncomes}</td>
-            <td>{totalExpenses}</td>
-            <td>{totalBalance}</td>
-          </tr>
-        </tfoot>
       </Table>
     </>
   );

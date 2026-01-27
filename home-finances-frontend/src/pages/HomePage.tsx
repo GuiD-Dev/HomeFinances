@@ -9,15 +9,15 @@ export function HomePage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { totalIncomes, totalExpenses, totalBalance } = useMemo(() => {
+  const { totalIncomes, totalExpenses, netBalance } = useMemo(() => {
     return people.reduce(
       (totals, person) => {
         totals.totalIncomes += person.incomes;
         totals.totalExpenses += person.expenses;
-        totals.totalBalance += person.balance;
+        totals.netBalance += person.balance;
         return totals;
       },
-      { totalIncomes: 0, totalExpenses: 0, totalBalance: 0 }
+      { totalIncomes: 0, totalExpenses: 0, netBalance: 0 }
     );
   }, [people]);
 
@@ -65,7 +65,7 @@ export function HomePage() {
         people={people}
         totalIncomes={totalIncomes}
         totalExpenses={totalExpenses}
-        totalBalance={totalBalance}
+        netBalance={netBalance}
       />
     </div>
   );
