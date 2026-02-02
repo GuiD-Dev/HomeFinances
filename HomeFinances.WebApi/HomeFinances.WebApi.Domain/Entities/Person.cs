@@ -18,7 +18,7 @@ public class Person : BaseEntity
 	{
 		DomainException.ThrowWhen([
 			(string.IsNullOrWhiteSpace(name), "Name cannot be empty"),
-			(age < 0, "Age cannot lower than 0"),
+			(age <= 0, "Age must be greater than 0"),
 		]);
 
 		Name = name;

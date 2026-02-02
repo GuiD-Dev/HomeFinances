@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeFinances.WebApi.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeFinances.WebApi.CrossCutting", "HomeFinances.WebApi.CrossCutting\HomeFinances.WebApi.CrossCutting.csproj", "{7293A679-9C8F-4E53-85CB-13AFE9931548}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeFinances.WebApi.Tests", "HomeFinances.WebApi.Tests\HomeFinances.WebApi.Tests.csproj", "{72BE67B7-52F4-47E0-96D4-4348D493BB6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{7293A679-9C8F-4E53-85CB-13AFE9931548}.Release|x64.Build.0 = Release|Any CPU
 		{7293A679-9C8F-4E53-85CB-13AFE9931548}.Release|x86.ActiveCfg = Release|Any CPU
 		{7293A679-9C8F-4E53-85CB-13AFE9931548}.Release|x86.Build.0 = Release|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Debug|x64.Build.0 = Debug|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Debug|x86.Build.0 = Debug|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Release|x64.ActiveCfg = Release|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Release|x64.Build.0 = Release|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Release|x86.ActiveCfg = Release|Any CPU
+		{72BE67B7-52F4-47E0-96D4-4348D493BB6C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
