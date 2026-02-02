@@ -3,7 +3,7 @@ using HomeFinances.WebApi.Domain.Entities;
 using HomeFinances.WebApi.Domain.Enums;
 using HomeFinances.WebApi.Domain.Exceptions;
 
-namespace HomeFinances.WebApi.Test.Domain;
+namespace HomeFinances.WebApi.Tests.Domain;
 
 public class TransactionTests
 {
