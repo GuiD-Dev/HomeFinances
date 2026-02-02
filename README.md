@@ -2,11 +2,13 @@
 
 An application to registry incomes and expenses in order to manage home finances.
 
-## Project Stack and Details
+
+## Project Stack
 
 - .NET 10
 - Entity Framework
 - Clean Architecture
+- xUnit
 - PostgreSQL
 - Docker
 - React 19
