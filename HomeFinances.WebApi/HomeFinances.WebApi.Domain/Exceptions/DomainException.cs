@@ -2,7 +2,7 @@ namespace HomeFinances.WebApi.Domain.Exceptions;
 
 public class DomainException(string message) : Exception(message)
 {
-  public static void ThrowsWhen(List<(bool condition, string message)> validations)
+  public static void ThrowWhen(List<(bool condition, string message)> validations)
   {
     var errors = new List<string>();
 

@@ -16,7 +16,7 @@ public class Person : BaseEntity
 
 	public Person(string name, int age)
 	{
-		DomainException.ThrowsWhen([
+		DomainException.ThrowWhen([
 			(string.IsNullOrWhiteSpace(name), "Name cannot be empty"),
 			(age < 0, "Age cannot lower than 0"),
 		]);
@@ -28,7 +28,7 @@ public class Person : BaseEntity
 
 	public void Update(Person data)
 	{
-		DomainException.ThrowsWhen([
+		DomainException.ThrowWhen([
 			(data.Age < 0, "Age cannot lower than 0"),
 			(data.Age < 18 && Incomes > 0, "Person with Incomes cannot have less than 18 years old"),
 		]);

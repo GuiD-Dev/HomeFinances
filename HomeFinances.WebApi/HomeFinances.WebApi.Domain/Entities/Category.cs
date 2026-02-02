@@ -10,7 +10,7 @@ public class Category : BaseEntity
 
 	public Category(string description, CategoryPurpose purpose)
 	{
-		DomainException.ThrowsWhen([
+		DomainException.ThrowWhen([
 			(string.IsNullOrWhiteSpace(description), "Description cannot be empty"),
 			(!Enum.IsDefined(typeof(CategoryPurpose), purpose), "Invalid purpose"),
 		]);

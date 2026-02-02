@@ -15,7 +15,7 @@ public class Transaction : BaseEntity
 
   public Transaction(string description, decimal value, TransactionType type)
   {
-    DomainException.ThrowsWhen([
+    DomainException.ThrowWhen([
       (string.IsNullOrWhiteSpace(description), "Description cannot be empty"),
       (value <= 0, "Value must be greater than 0"),
       (!Enum.IsDefined(typeof(TransactionType), type), "Invalid Transaction Type"),
@@ -28,7 +28,7 @@ public class Transaction : BaseEntity
 
   public void SetCategory(Category category)
   {
-    DomainException.ThrowsWhen([
+    DomainException.ThrowWhen([
       (
         (category.Purpose == CategoryPurpose.Income && Type == TransactionType.Expense)
         ||
@@ -42,7 +42,7 @@ public class Transaction : BaseEntity
 
   public void SetPerson(Person person)
   {
-    DomainException.ThrowsWhen([
+    DomainException.ThrowWhen([
       (person.Age < 18 && Category.Purpose == CategoryPurpose.Income, "Transaction as Income cannot be associated to a person under 18 years old"),
     ]);
 
