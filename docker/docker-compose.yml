@@ -1,6 +1,7 @@
 services:
   database:
     image: postgres:18
+    container_name: home-finances-db
     ports:
       - 5432:5432
     environment:
@@ -8,6 +9,7 @@ services:
 
   webapi:
     image: home-finances-webapi:latest
+    container_name: home-finances-webapi
     ports:
       - 5000:5000
     environment:
@@ -19,6 +21,7 @@ services:
 
   frontend:
     image: home-finances-frontend:latest
+    container_name: home-finances-frontend
     ports:
       - 4000:4000
     environment:
