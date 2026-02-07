@@ -7,6 +7,15 @@ services:
     environment:
       POSTGRES_PASSWORD: 1234
 
+  jaeger:
+    image: jaegertracing/jaeger:latest
+    container_name: home-finances-jaeger
+    restart: always
+    ports:
+      - 4317:4317
+      - 4318:4318
+      - 16686:16686
+
   webapi:
     image: home-finances-webapi:latest
     container_name: home-finances-webapi
@@ -16,8 +25,10 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:5000
       ConnectionStrings__PgSQlConnectionString: Host=database;Port=5432;Database=home_finances_db;Username=postgres;Password=1234;
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318
     depends_on:
       - database
+      - jaeger
 
   frontend:
     image: home-finances-frontend:latest
