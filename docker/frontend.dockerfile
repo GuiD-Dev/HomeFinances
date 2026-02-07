@@ -2,7 +2,6 @@ FROM node:24-alpine
 
 WORKDIR /home/app
 
-COPY home-finances-frontend/public/. ./public
 COPY home-finances-frontend/src/. ./src
 COPY home-finances-frontend/eslint.config.js ./
 COPY home-finances-frontend/index.html ./
