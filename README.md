@@ -5,13 +5,14 @@ An application to registry incomes and expenses in order to manage home finances
 
 ## Project Stack
 
-- .NET 10
-- Entity Framework
-- Clean Architecture
-- xUnit
-- PostgreSQL
-- Docker
-- React 19
+- [.NET 10](https://dotnet.microsoft.com/en-us/download/dotnet/10.0)
+- [Entity Framework](https://learn.microsoft.com/en-us/ef/)
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+- [xUnit](https://xunit.net)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Docker](https://docs.docker.com/)
+- [Jaeger](https://www.jaegertracing.io/)
+- [React 19](https://react.dev/)
 
 
 ## How to run the project
