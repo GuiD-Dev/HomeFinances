@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../HomeFinances.WebApi.Domain/HomeFinances.WebApi.Domain.csproj" />
+    <ProjectReference Include="../WebApi.Domain/WebApi.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

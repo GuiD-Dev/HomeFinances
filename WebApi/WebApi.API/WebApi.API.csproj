@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../HomeFinances.WebApi.CrossCutting/HomeFinances.WebApi.CrossCutting.csproj" />
+    <ProjectReference Include="../WebApi.CrossCutting/WebApi.CrossCutting.csproj" />
   </ItemGroup>
 
   <ItemGroup>

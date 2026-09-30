@@ -26,8 +26,8 @@ dist-ssr
 
 *.sql
 
-/HomeFinances.WebApi/*/bin
-/HomeFinances.WebApi/*/obj
+/WebApi/*/bin
+/WebApi/*/obj
 
 *.http
 
